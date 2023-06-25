@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Join from "./components/Join/Join";
+import { useState } from "react";
+import Chat from "./components/chat";
 
 function App() {
+  const [value,setValue] =useState("")
+  function name(e){
+    console.log(value)
+    setValue(e.target.value)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Join name={name} value={value} />} />
+          <Route path="/chat" element={<Chat value={value} />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
